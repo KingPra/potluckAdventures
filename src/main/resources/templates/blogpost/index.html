@@ -1,22 +1,31 @@
 <!DOCTYPE html>
-<html>
-	<head xmlns:th="http://www.thymeleaf.org">
-		<title>blog site</title>
-		
-	</head>
-	<body>
-		<h1>Welcome To Our Potluck Adventures</h1>
-		<h3>Check out our Potluck Adventures</h3>
-		<form>
-			<table>
-				<tr>
-					<td>Title</td>
-					<td><input type="text" th:field="${title}"/><td>
-				</tr>
-				<tr>
-					
-				</tr>
-			</table>
-		</form>
-	</body>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+	    <title>Blog Site</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    </head>
+    <body>
+        <h1>Welcome to Our Potluck Site!</h1>
+        <h3>Check out our Potluck Site!</h3>
+        <p>Please use the form below to submit a Blog Post:</p>
+ <form action="#" th:action="@{/}" th:object="${blogPost}" method="post">
+    <table>
+	<tr>
+            <td>Title</td>
+	    <td><input type="text" th:field="*{title}" /></td>
+	</tr>
+	<tr>
+	    <td>Author:</td>
+	    <td><input type="text" th:field="*{author}" /></td>
+	</tr>
+	<tr>
+    	    <td>Blog Entry:</td>
+	    <td><input type="text" th:field="*{blogEntry}" /></td>
+	</tr>
+	<tr>
+	    <td><button type="submit">Submit Your Post</button></td>
+	</tr>
+    </table>
+</form>
+    </body>
 </html>
