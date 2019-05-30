@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html>
-	<head>
+	<head xmlns:th="http://www.thymeleaf.org">
 		<title>blog site</title>
 		
 	</head>
 	<body>
 		<h1>Welcome To Our Potluck Adventures</h1>
 		<h3>Check out our Potluck Adventures</h3>
+		<form>
+			<table>
+				<tr>
+					<td>Title</td>
+					<td><input type="text" th:field="${title}"/><td>
+				</tr>
+				<tr>
+					
+				</tr>
+			</table>
+		</form>
 	</body>
 </html>
