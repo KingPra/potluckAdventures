@@ -3,30 +3,54 @@
     <head>
 	    <title>Blog Site</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link href="../../webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/standard.css" rel="stylesheet">
     </head>
     <body>
-    	
+      <div th:replace="fragments/navbar :: navbar" />
+    <div class="container">
         <h1>Welcome to Our Potluck Site!</h1>
         <h3>Check out our Potluck Site!</h3>
-        <p>Please use the form below to submit a Blog Post:</p>
- <form action="#" th:action="@{/}" th:object="${blogPost}" method="post">
-    <table>
-	<tr>
-            <td>Title</td>
-	    <td><input type="text" th:field="*{title}" /></td>
-	</tr>
-	<tr>
-	    <td>Author:</td>
-	    <td><input type="text" th:field="*{author}" /></td>
-	</tr>
-	<tr>
-    	    <td>Blog Entry:</td>
-	    <td><input type="text" th:field="*{blogEntry}" /></td>
-	</tr>
-	<tr>
-	    <td><button type="submit">Submit Your Post</button></td>
-	</tr>
-    </table>
-</form>
+ 
+		<div class="row">
+			<div th:each="blog:${posts}">
+				<div class="col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<p th:text="${blog.title}"/>
+						</div>
+						<div class="panel-body">
+							<p> Id = <span th:text=${blog.Id}/></p>
+							<p>Author: <span th:text="${blog.author}"/></p>
+							<p th:text="${blog.blogEntry}"/>
+						</div>
+						<!-- delete button -->
+						<div class="panel-footer">
+							<form action="#" th:action="@{'/blog_posts/{id}'(id=${blog.id})}" th:method="delete"
+			                      class="form-horizontal">
+			        			<div class="form-group">
+			        				<input type="hidden" name="_method" value="delete"/>
+			            			<button type="submit" class="btn btn-danger btn-sm" th:text="Delete">Delete</button>
+			    				</div>
+							</form>
+							<form action="#" th:action="@{'/blog_posts/{id}'(id=${blog.id})}" th:method="delete"
+			                      class="form-horizontal">
+			        			<div class="form-group">
+			        				<input type="hidden" name="_method" value="delete"/>
+			            			<button type="submit" class="btn btn-danger btn-sm" th:text="Edit">Edit</button>
+			    				</div>
+							</form>
+						</div>
+					<!-- end of delete -->
+					</div>
+	
+				</div>
+
+			</div>
+		</div>
+
+    </div>
+	<script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
     </body>
 </html>

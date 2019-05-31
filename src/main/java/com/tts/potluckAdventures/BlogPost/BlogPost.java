@@ -37,6 +37,10 @@ public class BlogPost {
 		return blogEntry;
 	}
 
+	public long getId() {
+		return id;
+	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
