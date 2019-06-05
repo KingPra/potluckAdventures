@@ -5,29 +5,35 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <!-- Latest compiled and minified CSS -->
 	    <link href="../../webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	    <link href="css/standard.css" rel="stylesheet">
+	    <link href="../../css/standard.css" rel="stylesheet">
 </head>
-	<body>
+<body>
+	<div class="container">
 		<div th:replace="fragments/navbar :: navbar" ></div>
-		<div class="container">
-		<h1>Create a New Blog Post</h1>
- 		<form action="#" th:action="@{/blogposts/new}" th:object="${blogPost}" method="post">
- 		
- 		<div class="form-group">
- 			<input type="text" class="form-control" placeholder="Blog Title..." th:field="*{title}" />
- 		</div>
- 		
- 		<div class="form-group">
- 			<input type="text" class="form-control" placeholder="Your Name Here..." th:field="*{author}" />
- 		</div>
- 		
- 		<div class="form-group">
- 			<textarea type="text" row="3" class ="form-control" placeholder="Blog Entry" th:field="*{blogEntry}" />
- 		</div>
-
- 		<button class="btn btn-primary">Submit Your Post</button>
-</form>
-</div>
+			<div class="row">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h1>Create a New Blog Post</h1>
+					</div>
+					<form action="#" th:action="@{/blogposts/new}" th:object="${blogPost}" method="post">
+						<div class="panel-body">
+				 			<div class="form-group">
+				 				<input type="text" class="form-control" placeholder="Blog Title..." th:field="*{title}" />
+				 			</div> 		
+				 			<div class="form-group">
+				 				<input type="text" class="form-control" placeholder="Your Name Here..." th:field="*{author}" />
+				 			</div>
+				 			<div class="form-group">
+				 				<textarea type="text" row="3" class ="form-control" placeholder="Blog Entry" th:field="*{blogEntry}" />
+				 			</div>
+						</div>
+		 			<div class="panel-footer">
+		 				<button class="btn btn-primary">Submit Your Post</button>
+		 			</div>
+				</form>
+		 	</div>
+		</div>
+	</div>
 	<script src="../../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="../../webjars/jquery/1.9.1/jquery.min.js"></script>
 </body>

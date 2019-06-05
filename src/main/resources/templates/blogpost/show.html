@@ -5,11 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <!-- Latest compiled and minified CSS -->
 	    <link href="../../webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	    <link href="css/standard.css" rel="stylesheet">
+	    <link href="../../css/standard.css" rel="stylesheet">
 </head>
 	<body>
 		<div class="container">
-		<div th:replace="fragments/navbar :: navbar" ></div>
+			<div th:replace="fragments/navbar :: navbar" ></div>
 			<div class="panel panel-default">
 				<h1 class="panel-header">Blog Post</h1>
 				<h2 class="panel-body" th:text="${post.title}"></h2>
@@ -17,8 +17,8 @@
 	 			<p th:text="${post.blogEntry}"></p>
 	 			<div class="panel-footer">
 	 				<form action="#" th:action="@{'/blogpost/edit/{id}'(id=${post.id})}" th:method="get"
-			                      class="form-horizontal">
-	 					<button>Edit</button>
+			                      class="btn">
+	 					<button class="btn btn-warning">Edit</button>
 	 				</form>
 	 			</div>
 			</div>

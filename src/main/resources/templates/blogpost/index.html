@@ -7,17 +7,17 @@
         <link href="../../css/standard.css" rel="stylesheet">
     </head>
     <body>
-      <div th:replace="fragments/navbar :: navbar"></div>
     <div class="container">
+     <div th:replace="fragments/navbar :: navbar"></div>
         <h1>Welcome to Our Potluck Site!</h1>
-        <h3>Check out our Potluck Site!</h3>
+        <h3>Check out the blogs!</h3>
  
 		<div class="row">
 			<div th:each="blog:${posts}">
-				<div class="col-md-6">
+				<div>
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<p th:text="${blog.title}"/>
+							<p class="panel-title" th:text="${blog.title}"/>
 						</div>
 						<div class="panel-body">
 							<p> Id = <span th:text=${blog.Id}/></p>
@@ -26,34 +26,23 @@
 						</div>
 						<!-- delete button -->
 						<div class="panel-footer">
-							<form action="#" th:action="@{'/blogpost/{id}'(id=${blog.id})}" th:method="delete"
-			                      class="form-horizontal">
-			        			<div class="form-group">
-			            			<button type="submit" class="btn btn-danger btn-sm" th:text="Delete">Delete</button>
-			    				</div>
+							<form action="#" th:action="@{'/blogpost/{id}' (id=${blog.id})}" th:method="get" class="btn">
+								<button type="submit" class="btn btn-primary btn-sm">Show Blog Post</button>
 							</form>
-											
 							<form action="#"  th:action="@{'/blogpost/edit/{id}' (id=${blog.id})}" th:method="get"
-			                     class="form-control-inline" >
-			        			<div class="form-group">
-			        				
-			            			<button class="btn btn-danger btn-sm">Edit</button>
-			    				</div>
+			                     class="btn" >
+			            		<button class="btn btn-danger btn-sm">Edit</button>
 							</form>
-							<form action="#" th:action="@{'/blogpost/{id}' (id=${blog.id})}" th:method="get" class="form-control-inline">
-								<div class="form-group">
-									<button type="submit" class="btn btn-primary btn-sm">Show Blog Post</button>
-								</div>
+							<form action="#" th:action="@{'/blogpost/{id}'(id=${blog.id})}" th:method="delete"
+			                      class="btn">
+			            		<button type="submit" class="btn btn-danger btn-sm" th:text="Delete">Delete</button>
 							</form>
 						</div>
 					<!-- end of delete -->
-					</div>
-	
+					</div>	
 				</div>
-
 			</div>
 		</div>
-
     </div>
 	<script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
