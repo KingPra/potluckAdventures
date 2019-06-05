@@ -7,7 +7,7 @@
         <link href="../../css/standard.css" rel="stylesheet">
     </head>
     <body>
-      <div th:replace="fragments/navbar :: navbar" />
+      <div th:replace="fragments/navbar :: navbar"></div>
     <div class="container">
         <h1>Welcome to Our Potluck Site!</h1>
         <h3>Check out our Potluck Site!</h3>
@@ -26,19 +26,24 @@
 						</div>
 						<!-- delete button -->
 						<div class="panel-footer">
-							<form action="#" th:action="@{'/blog_posts/{id}'(id=${blog.id})}" th:method="delete"
+							<form action="#" th:action="@{'/blogpost/{id}'(id=${blog.id})}" th:method="delete"
 			                      class="form-horizontal">
 			        			<div class="form-group">
-			        				<input type="hidden" name="_method" value="delete"/>
 			            			<button type="submit" class="btn btn-danger btn-sm" th:text="Delete">Delete</button>
 			    				</div>
 							</form>
-							<form action="#" th:action="@{'/blog_posts/{id}'(id=${blog.id})}" th:method="delete"
-			                      class="form-horizontal">
+											
+							<form action="#"  th:action="@{'/blogpost/edit/{id}' (id=${blog.id})}" th:method="get"
+			                     class="form-control-inline" >
 			        			<div class="form-group">
-			        				<input type="hidden" name="_method" value="delete"/>
-			            			<button type="submit" class="btn btn-danger btn-sm" th:text="Edit">Edit</button>
+			        				
+			            			<button class="btn btn-danger btn-sm">Edit</button>
 			    				</div>
+							</form>
+							<form action="#" th:action="@{'/blogpost/{id}' (id=${blog.id})}" th:method="get" class="form-control-inline">
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary btn-sm">Show Blog Post</button>
+								</div>
 							</form>
 						</div>
 					<!-- end of delete -->

@@ -1,71 +1,72 @@
 package com.tts.potluckAdventures.BlogPost;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @Controller
-@RequestMapping
 public class BlogPostController {
 
 	@Autowired
 	private BlogPostRepository blogPostRepository;
 
-	private static List<BlogPost> posts = new ArrayList<>();
-
-	@GetMapping(value = "/")
+	@GetMapping("/")
 	public String index(BlogPost blogPost, Model model) {
-		model.addAttribute("posts", posts);
+		model.addAttribute("posts", blogPostRepository.findAll());
 		return "blogpost/index";
 	}
 
-	@GetMapping(value = "/blog_posts/new")
-	public String newBlog(BlogPost blogPost) {
+	// getting new blog form
+	@GetMapping("blogposts/new")
+	public String newBlogPost(BlogPost blogPost) {
 		return "blogpost/new";
-
 	}
 
-	@PostMapping(value = "/")
-	public String addNewBlogPost(BlogPost blogPost, Model model) {
-		blogPostRepository.save(new BlogPost(blogPost.getTitle(), blogPost.getAuthor(), blogPost.getBlogEntry()));
-		posts.add(blogPost);
-		model.addAttribute("id", blogPost.getId());
-		model.addAttribute("title", blogPost.getTitle());
-		model.addAttribute("author", blogPost.getAuthor());
-		model.addAttribute("blogEntry", blogPost.getBlogEntry());
+	// post new blog to database
+	@PostMapping("blogposts/new")
+	public String submitBlogPost(BlogPost blogPost, Model model) {
+		BlogPost post = blogPostRepository.save(blogPost);
+		model.addAttribute("title", post.getTitle());
+		model.addAttribute("author", post.getAuthor());
+		model.addAttribute("blogEntry", post.getBlogEntry());
 		return "blogpost/result";
 	}
 
-	private BlogPost blogPost;
-
-	@PostMapping(value = "/blog_posts/new")
-	public String create(BlogPost blogPost, Model model) {
-		blogPostRepository.save(blogPost);
-		posts.add(blogPost);
-		model.addAttribute("title", blogPost.getTitle());
-		model.addAttribute("author", blogPost.getAuthor());
-		model.addAttribute("blogEntry", blogPost.getBlogEntry());
-		return "blogpost/result";
-	}
-
-	@RequestMapping(value = "/blog_posts/{id}", method = RequestMethod.DELETE)
-	public String deletePostWithId(@PathVariable Long id, BlogPost blogPost) {
-		for (int i = 0; i < posts.size(); i++) {
-			if (id == posts.get(i).getId()) {
-				posts.remove(i);
-			}
-		}
-
+	@DeleteMapping("/blogpost/{id}")
+	public String deletePostById(BlogPost blogPost, @PathVariable Long id) {
 		blogPostRepository.deleteById(id);
-		return "blogpost/index";
+		return "blogpost/deleted";
+	}
 
+	@GetMapping("/blogpost/{id}")
+	public String showSinglePost(BlogPost blogPost, Model model, @PathVariable Long id) {
+
+		BlogPost post = blogPostRepository.findById(id)
+				.orElseThrow(() -> (new IllegalArgumentException("invalid id " + id)));
+		model.addAttribute("post", post);
+		return "blogpost/show";
+	}
+
+	@GetMapping("/blogpost/edit/{id}")
+	public String editBlogPost(BlogPost blogPost, Model model, @PathVariable Long id) {
+		BlogPost post = blogPostRepository.findById(id)
+				.orElseThrow(() -> (new IllegalArgumentException("invalid id " + id)));
+		model.addAttribute("post", post);
+		return "blogpost/edit";
+	}
+
+	@PutMapping("/blogpost/edit/{id}")
+	public String submitBlogPostEdit(BlogPost blogPost, Model model, @PathVariable Long id) {
+		BlogPost post = blogPostRepository.save(blogPost);
+		model.addAttribute("title", post.getTitle());
+		model.addAttribute("author", post.getAuthor());
+		model.addAttribute("blogEntry", post.getBlogEntry());
+		model.addAttribute("id", post.getId());
+		return "blogpost/result";
 	}
 }
