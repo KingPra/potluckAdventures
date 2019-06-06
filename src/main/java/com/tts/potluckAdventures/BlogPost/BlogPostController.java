@@ -30,10 +30,7 @@ public class BlogPostController {
 	// post new blog to database
 	@PostMapping("blogposts/new")
 	public String submitBlogPost(BlogPost blogPost, Model model) {
-		BlogPost post = blogPostRepository.save(blogPost);
-		model.addAttribute("title", post.getTitle());
-		model.addAttribute("author", post.getAuthor());
-		model.addAttribute("blogEntry", post.getBlogEntry());
+		blogPostRepository.save(blogPost);
 		return "blogpost/result";
 	}
 
@@ -62,11 +59,8 @@ public class BlogPostController {
 
 	@PutMapping("/blogpost/edit/{id}")
 	public String submitBlogPostEdit(BlogPost blogPost, Model model, @PathVariable Long id) {
-		BlogPost post = blogPostRepository.save(blogPost);
-		model.addAttribute("title", post.getTitle());
-		model.addAttribute("author", post.getAuthor());
-		model.addAttribute("blogEntry", post.getBlogEntry());
-		model.addAttribute("id", post.getId());
+		blogPostRepository.save(blogPost);
+		model.addAttribute("blogPost", blogPost);
 		return "blogpost/result";
 	}
 }
