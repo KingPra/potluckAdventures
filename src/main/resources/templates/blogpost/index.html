@@ -1,50 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-	    <title>Blog Site</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <link href="../../webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../../css/standard.css" rel="stylesheet">
-    </head>
-    <body>
-    <div class="container">
-     <div th:replace="fragments/navbar :: navbar"></div>
-        <h1>Welcome to Our Potluck Site!</h1>
-        <h3>Check out the blogs!</h3>
- 
+
+<head>
+	<title>Blog Site</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="../../webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../css/standard.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container">
+		<div th:replace="fragments/navbar :: navbar"></div>
+		<h1>Welcome to Our Potluck Site!</h1>
+		<h3>Check out the blogs!</h3>
+
 		<div class="row">
 			<div th:each="blog:${posts}">
 				<div>
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<p class="panel-title" th:text="${blog.title}"/>
+							<p class="panel-title" th:text="${blog.title}" />
 						</div>
 						<div class="panel-body">
-							<p><span class="text-muted">Id =</span> <span th:text=${blog.Id}/></p>
-							<p><span class="text-muted">Author: </span><span th:text="${blog.author}"/></p>
-							<p th:text="${blog.blogEntry}"/>
+							<p><span class="text-muted">Id =</span> <span th:text=${blog.Id} /></p>
+							<p><span class="text-muted">Author: </span><span th:text="${blog.author}" /></p>
+							<p th:text="${blog.blogEntry}" />
 						</div>
 						<!-- delete button -->
 						<div class="panel-footer">
-							<form action="#" th:action="@{'/blogpost/{id}' (id=${blog.id})}" th:method="get" class="btn">
+							<form action="#" th:action="@{'/blogpost/{id}' (id=${blog.id})}" th:method="get"
+								class="btn">
 								<button type="submit" class="btn btn-primary btn-sm">Show Blog Post</button>
 							</form>
-							<form action="#"  th:action="@{'/blogpost/edit/{id}' (id=${blog.id})}" th:method="get"
-			                     class="btn" >
-			            		<button class="btn btn-danger btn-sm">Edit</button>
+							<form action="#" th:action="@{'/blogpost/edit/{id}' (id=${blog.id})}" th:method="get"
+								class="btn">
+								<button class="btn btn-danger btn-sm">Edit</button>
 							</form>
 							<form action="#" th:action="@{'/blogpost/{id}'(id=${blog.id})}" th:method="delete"
-			                      class="btn">
-			            		<button type="submit" class="btn btn-danger btn-sm" th:text="Delete">Delete</button>
+								class="btn">
+								<button type="submit" class="btn btn-danger btn-sm" th:text="Delete">Delete</button>
 							</form>
 						</div>
-					<!-- end of delete -->
-					</div>	
+						<!-- end of delete -->
+					</div>
 				</div>
 			</div>
 		</div>
-    </div>
+	</div>
 	<script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
-    </body>
+</body>
+
 </html>

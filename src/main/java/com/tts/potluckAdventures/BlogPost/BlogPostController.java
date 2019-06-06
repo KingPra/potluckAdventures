@@ -58,8 +58,10 @@ public class BlogPostController {
 	}
 
 	@PutMapping("/blogpost/edit/{id}")
-	public String submitBlogPostEdit(BlogPost blogPost, Model model, @PathVariable Long id) {
-		blogPostRepository.save(blogPost);
+	public String submitBlogPostEdit(@PathVariable Long id, BlogPost blogPost, Model model) {
+		BlogPost blogEdit = blogPostRepository.findById(id).orElse(null);
+		blogEdit.setAuthor(blogPost.getAuthor()).setTitle(blogPost.getTitle()).setBlogEntry(blogPost.getBlogEntry());
+		blogPostRepository.save(blogEdit);
 		model.addAttribute("blogPost", blogPost);
 		return "blogpost/result";
 	}

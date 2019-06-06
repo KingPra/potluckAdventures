@@ -41,25 +41,24 @@ public class BlogPost {
 		return id;
 	}
 
-	public void setTitle(String title) {
+	public BlogPost setTitle(String title) {
 		this.title = title;
+		return this;
 	}
 
-	public void setAuthor(String author) {
+	public BlogPost setAuthor(String author) {
 		this.author = author;
+		return this;
 	}
 
-	public void setBlogEntry(String blogEntry) {
+	public BlogPost setBlogEntry(String blogEntry) {
 		this.blogEntry = blogEntry;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+		return this;
 	}
 
 	@Override
 	public String toString() {
-		return "BlogPost [id=" + id + ", title=" + title + ", author=" + author + ", blogEntry=" + blogEntry + "]";
+		return "BlogPost [id= mom" + id + ", title=" + title + ", author=" + author + ", blogEntry=" + blogEntry + "]";
 	}
 
 }
