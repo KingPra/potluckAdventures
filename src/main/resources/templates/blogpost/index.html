@@ -20,8 +20,8 @@
 							<p class="panel-title" th:text="${blog.title}"/>
 						</div>
 						<div class="panel-body">
-							<p> Id = <span th:text=${blog.Id}/></p>
-							<p>Author: <span th:text="${blog.author}"/></p>
+							<p><span class="text-muted">Id =</span> <span th:text=${blog.Id}/></p>
+							<p><span class="text-muted">Author: </span><span th:text="${blog.author}"/></p>
 							<p th:text="${blog.blogEntry}"/>
 						</div>
 						<!-- delete button -->
